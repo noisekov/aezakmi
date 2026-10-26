@@ -36,6 +36,14 @@ export const router = createBrowserRouter([
               return { Component: Cards };
             },
           },
+          {
+            path: "/rates",
+            lazy: async () => {
+              const { default: Rates } = await import("../pages/Rates/Rates");
+
+              return { Component: Rates };
+            },
+          },
         ],
       },
     ],

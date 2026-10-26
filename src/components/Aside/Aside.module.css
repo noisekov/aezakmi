@@ -1,4 +1,162 @@
 .aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   background: #ffffff;
   box-shadow: 2px 0px 8px 0px #0000000a;
+  padding: 30px 20px 20px;
+  width: 76px;
+  transition: 0.3s all;
+}
+
+.aside.open {
+  width: 240px;
+  align-items: start;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  gap: 10px;
+  transition: 0.3s all;
+}
+
+.logo:before {
+  content: url("/icons/logo.svg");
+  width: 28px;
+  height: 28px;
+}
+
+.aside.open .menu {
+  align-self: start;
+  width: 100%;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  flex-grow: 1;
+  padding: 20px 0;
+  gap: 4px;
+}
+
+.menu__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 100%;
+  color: #8e93a1;
+  text-decoration: none;
+  padding: 10px 12px;
+  transition: 0.3s all;
+}
+
+.logo:hover,
+.logout:hover,
+.menu__item:hover {
+  transform: scale(1.05);
+}
+
+.aside.open .menu__item {
+  flex-direction: row;
+}
+
+.menu__item.active {
+  color: #2563eb;
+  background: #e7eeff;
+  border-radius: 16px;
+}
+
+.menu__item:before {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.menu__item-rates:before {
+  content: url("/icons/rates.svg");
+}
+
+.menu__item-cards:before {
+  content: url("/icons/cards.svg");
+}
+
+.menu__title {
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 100%;
+  letter-spacing: 10%;
+  color: #8e93a1;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.menu::before {
+  content: "";
+  position: absolute;
+  top: 65px;
+  left: 20px;
+  background: #e3e4ea;
+  width: 0;
+  height: 1px;
+  transition: 0.3s all;
+}
+
+.menu::after {
+  content: "";
+  position: absolute;
+  bottom: 65px;
+  left: 20px;
+  background: #e3e4ea;
+  width: 0;
+  height: 1px;
+  transition: 0.3s all;
+}
+
+.aside.open .menu::before,
+.aside.open .menu::after {
+  width: 200px;
+}
+
+.logout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 100%;
+  color: #8e93a1;
+  transition: 0.3s all;
+}
+
+.logout:before {
+  content: url("/icons/logout.svg");
+  width: 20px;
+  height: 20px;
+}
+
+.aside.open .logout {
+  justify-content: center;
+  flex-direction: row;
+  font-size: 15px;
+  color: #ea3a3a;
+  gap: 12px;
 }
