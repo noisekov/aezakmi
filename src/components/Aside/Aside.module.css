@@ -63,6 +63,7 @@
   color: #8e93a1;
   text-decoration: none;
   padding: 10px 12px;
+  white-space: nowrap;
   transition: 0.3s all;
 }
 
