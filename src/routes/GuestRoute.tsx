@@ -5,11 +5,7 @@ import { selectIsAuthenticated } from "../store/selectors";
 const GuestRoute = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
-  if (isAuthenticated) {
-    return <Navigate to="/cards" replace />;
-  }
-
-  return <Outlet />;
+  return isAuthenticated ? <Navigate to="/cards" replace /> : <Outlet />;
 };
 
 export default GuestRoute;

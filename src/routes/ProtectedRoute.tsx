@@ -5,11 +5,7 @@ import { selectIsAuthenticated } from "../store/selectors";
 const ProtectedRoute = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
-  if (!isAuthenticated) {
-    return <Navigate to="/" replace />;
-  }
-
-  return <Outlet />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;

@@ -1,11 +1,10 @@
 .form {
   width: 100%;
-  max-width: 360px;
-  margin: 100px auto;
-  padding: 32px;
+  max-width: 393px;
+  margin: 0 auto;
+  padding: 48px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
@@ -14,17 +13,34 @@
 }
 
 .input {
+  background: #f6f6fb;
   width: 100%;
-  padding: 12px 14px;
+  padding: 12px 14px 12px 44px;
   font-size: 16px;
   color: #111827;
-  border: 1px solid #d1d5db;
+  border: none;
   border-radius: 8px;
   outline: none;
-  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: left 20px center;
   transition:
     border-color 0.2s,
     box-shadow 0.2s;
+}
+
+.input__password {
+  background-image: url("/icons/password.svg");
+}
+
+.input__email {
+  background-image: url("/icons/email.svg");
+}
+
+.input__container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .input::placeholder {
@@ -34,4 +50,27 @@
 .input:focus {
   border-color: #6366f1;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.title {
+  color: #18184c;
+  align-self: center;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  padding: 0;
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  align-self: center;
+  color: #8e93a1;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  padding: 0;
+  margin: 0 0 24px;
 }

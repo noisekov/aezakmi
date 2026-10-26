@@ -17,7 +17,7 @@ const Login = () => {
 
     if (isValidUser && loginVal && typeof loginVal === "string") {
       store.dispatch(login(loginVal));
-      navigate("/");
+      navigate("/cards", { replace: true });
     } else {
       //ошибки валидации
     }
@@ -26,19 +26,25 @@ const Login = () => {
   return (
     <div>
       <form className={styles.form} onSubmit={submit}>
-        <input
-          className={styles.input}
-          type="text"
-          name="login"
-          placeholder="Введите ваш логин"
-        />
-        <input
-          className={styles.input}
-          type="password"
-          name="password"
-          placeholder="Введите ваш пароль"
-        />
-        <Button type="submit">Войти</Button>
+        <h1 className={styles.title}>Log in</h1>
+        <p className={styles.subtitle}>Welcome Back</p>
+        <div className={styles.input__container}>
+          <input
+            className={`${styles.input} ${styles.input__email}`}
+            type="text"
+            name="login"
+            placeholder="Email Address"
+          />
+          <input
+            className={`${styles.input} ${styles.input__password}`}
+            type="password"
+            name="password"
+            placeholder="Password"
+          />
+        </div>
+        <Button className={styles.btn} type="submit">
+          Login
+        </Button>
       </form>
     </div>
   );
