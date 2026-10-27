@@ -1,5 +1,7 @@
+import CurrencyRates from "../../components/CurrencyRates/CurrencyRates";
+
 const Rates = () => {
-  return <div>Rates</div>;
+  return <CurrencyRates />;
 };
 
 export default Rates;
