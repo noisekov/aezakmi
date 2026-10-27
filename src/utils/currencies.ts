@@ -1,14 +1,14 @@
 import type { CurrencyInfo, Period } from "../types/currency";
 
 export const CURRENCIES: CurrencyInfo[] = [
-  { code: "AUD", name: "Australian Dollar", flag: "🇦🇺" },
-  { code: "BRL", name: "Brazilian Real", flag: "🇧🇷" },
-  { code: "CAD", name: "Canadian Dollar", flag: "🇨🇦" },
-  { code: "CHF", name: "Swiss Franc", flag: "🇨🇭" },
-  { code: "EUR", name: "Euro", flag: "🇪🇺" },
-  { code: "GBP", name: "British Pound", flag: "🇬🇧" },
-  { code: "JPY", name: "Japanese Yen", flag: "🇯🇵" },
-  { code: "NZD", name: "New Zealand Dollar", flag: "🇳🇿" },
+  { code: "AUD", name: "Australian Dollar", flagCode: "au" },
+  { code: "BRL", name: "Brazilian Real", flagCode: "br" },
+  { code: "CAD", name: "Canadian Dollar", flagCode: "ca" },
+  { code: "CHF", name: "Swiss Franc", flagCode: "ch" },
+  { code: "EUR", name: "Euro", flagCode: "eu" },
+  { code: "GBP", name: "British Pound", flagCode: "gb" },
+  { code: "JPY", name: "Japanese Yen", flagCode: "jp" },
+  { code: "NZD", name: "New Zealand Dollar", flagCode: "nz" },
 ];
 
 const DAYS = {

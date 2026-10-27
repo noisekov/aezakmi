@@ -8,12 +8,14 @@ export type CurrencyCode =
   | "JPY"
   | "NZD";
 
+export type FlagCode = "au" | "br" | "ca" | "ch" | "eu" | "gb" | "jp" | "nz";
+
 export type Period = "1W" | "1M" | "3M" | "6M" | "1Y";
 
 export interface CurrencyInfo {
   code: CurrencyCode;
   name: string;
-  flag: string;
+  flagCode: FlagCode;
 }
 
 export interface ApiRate {

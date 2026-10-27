@@ -82,7 +82,11 @@ const CurrencyTable = ({
                 >
                   <td>
                     <div className={styles.currencyInfo}>
-                      <span className={styles.flag}>{currency.flag}</span>
+                      <span
+                        className={`fi fi-${currency.flagCode} ${styles.flag}`}
+                        role="img"
+                        aria-label={currency.name}
+                      />
 
                       <span className={styles.currencyCode}>
                         {currency.code}

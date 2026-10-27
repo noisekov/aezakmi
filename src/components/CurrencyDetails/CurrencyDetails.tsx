@@ -44,7 +44,11 @@ const CurrencyDetails = ({
   return (
     <aside className={styles.panel} data-currency-details>
       <div className={styles.heading}>
-        <span className={styles.flag}>{currency.flag}</span>
+        <span
+          className={`fi fi-${currency.flagCode} ${styles.flag}`}
+          role="img"
+          aria-label={currency.name}
+        />
 
         <div className={styles.headingText}>
           <h2 className={styles.title}>USD / {currency.code}</h2>

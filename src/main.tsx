@@ -6,6 +6,7 @@ import { router } from "./routes/routes.tsx";
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
 import "@fontsource-variable/inter";
+import "flag-icons/css/flag-icons.min.css";
 
 const root = document.getElementById("root");
 

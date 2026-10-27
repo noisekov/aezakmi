@@ -17,8 +17,15 @@
 }
 
 .flag {
-  padding-top: 2px;
-  font-size: 13px;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 22px;
+  height: 16px;
+  margin-top: 2px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 2px;
 }
 
 .headingText {

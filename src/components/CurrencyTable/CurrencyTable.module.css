@@ -78,9 +78,14 @@
 }
 
 .flag {
+  display: inline-block;
   flex-shrink: 0;
-  font-size: 12px;
-  line-height: 1;
+  width: 22px;
+  height: 16px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 2px;
 }
 
 .currencyCode {
