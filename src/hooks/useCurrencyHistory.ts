@@ -49,7 +49,7 @@ const useCurrencyHistory = (currency: CurrencyCode | null, period: Period) => {
           key,
           history: [],
           error:
-            error instanceof Error ? error.message : "Ошибка загрузки истории.",
+            error instanceof Error ? error.message : "Error loading history.",
         });
       }
     }

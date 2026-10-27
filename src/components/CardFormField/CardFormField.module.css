@@ -1,0 +1,83 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.label {
+  color: #191a4b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.required {
+  color: #ea3a3a;
+}
+
+.error {
+  color: #ea3a3a;
+  font-size: 12px;
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  min-width: 0;
+  border: 1.5px solid transparent;
+  border-radius: 11px;
+  background-color: #f1f2f8;
+  color: #191a4b;
+  padding: 11px 12px;
+  font: inherit;
+  font-size: 12px;
+  outline: none;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: #aaa9e8;
+}
+
+.field textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #9293a7;
+}
+
+@media (max-width: 480px) {
+  .field input,
+  .field textarea,
+  .field select {
+    font-size: 14px;
+  }
+}
+
+.invalid .label {
+  color: #ea3a3a;
+}
+
+.invalid input,
+.invalid textarea,
+.invalid select {
+  border: 1.5px solid #ea3a3a;
+  background-color: #fff1f1;
+}
+
+.invalid input:focus,
+.invalid textarea:focus,
+.invalid select:focus {
+  border-color: #ea3a3a;
+  outline: none;
+}
+
+.error {
+  color: #ea3a3a;
+  font-size: 12px;
+}

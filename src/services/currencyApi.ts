@@ -45,13 +45,13 @@ async function fetchRateSeries(
   const response = await fetch(url.toString(), { signal });
 
   if (!response.ok) {
-    throw new Error("Не удалось получить курсы валют.");
+    throw new Error("Failed to retrieve exchange rates.");
   }
 
   const data: unknown = await response.json();
 
   if (!Array.isArray(data)) {
-    throw new Error("API вернул некорректные данные.");
+    throw new Error("The API returned incorrect data.");
   }
 
   return data.filter(isApiRate);
@@ -108,7 +108,7 @@ export async function getTableRates(
   }
 
   if (rows.length === 0) {
-    throw new Error("API не вернул доступные курсы валют.");
+    throw new Error("The API did not return any available exchange rates.");
   }
 
   return rows;

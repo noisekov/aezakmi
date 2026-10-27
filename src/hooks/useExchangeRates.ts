@@ -23,7 +23,7 @@ const useExchangeRates = () => {
         }
 
         setError(
-          error instanceof Error ? error.message : "Ошибка загрузки курсов.",
+          error instanceof Error ? error.message : "Error loading courses.",
         );
       } finally {
         if (!controller.signal.aborted) {

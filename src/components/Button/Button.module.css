@@ -24,4 +24,13 @@
 }
 
 .button--cancel {
+  border: 1px solid #e1e2ed;
+  background: #ffffff;
+  color: #777991;
+}
+
+.button--cancel:disabled,
+.button--apply:disabled {
+  cursor: wait;
+  opacity: 0.6;
 }

@@ -1,5 +1,7 @@
+import CreateCardForm from "../../components/CreateCardForm/CreateCardForm";
+
 const Cards = () => {
-  return <>CARDS</>;
+  return <CreateCardForm />;
 };
 
 export default Cards;
