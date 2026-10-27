@@ -8,10 +8,7 @@ interface HistoryState {
   error: string;
 }
 
-export default function useCurrencyHistory(
-  currency: CurrencyCode | null,
-  period: Period,
-) {
+const useCurrencyHistory = (currency: CurrencyCode | null, period: Period) => {
   const [result, setResult] = useState<HistoryState | null>(null);
 
   const requestKey = currency ? `${currency}:${period}` : null;
@@ -72,4 +69,6 @@ export default function useCurrencyHistory(
 
     error: currentResult?.error ?? "",
   };
-}
+};
+
+export default useCurrencyHistory;
