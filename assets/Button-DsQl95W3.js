@@ -1,0 +1,1 @@
+import{r as e}from"./index-BMNXu9zA.js";var t={button:`_button_1br8p_1`,"button--apply":`_button--apply_1br8p_41`,"button--cancel":`_button--cancel_1br8p_51`},n=e(),r=({children:e,className:r=``,typeBtn:i=`apply`,...a})=>(0,n.jsx)(`button`,{className:`${t.button} ${r} ${t[`button--${i}`]}`,...a,children:e});export{r as t};
