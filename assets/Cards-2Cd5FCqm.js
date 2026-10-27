@@ -1,0 +1,1 @@
+import{r as e}from"./index-CUDvPVwc.js";var t=e(),n=()=>(0,t.jsx)(t.Fragment,{children:`CARDS`});export{n as default};
