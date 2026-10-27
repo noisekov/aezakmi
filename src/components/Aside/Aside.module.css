@@ -1,5 +1,9 @@
 .aside {
+  position: sticky;
+  top: 0;
   height: 100vh;
+  min-height: 100vh;
+  align-self: flex-start;
   display: flex;
   flex-direction: column;
   align-items: center;
