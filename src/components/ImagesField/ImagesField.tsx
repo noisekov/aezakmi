@@ -1,15 +1,12 @@
 import { useState } from "react";
-import styles from "./ImagesField.module.css";
+import type { DragEvent } from "react";
 import CardFormField from "../CardFormField/CardFormField";
+import styles from "./ImagesField.module.css";
+import type { CardImage } from "../../types/cardFormTypes";
 
 interface ImagesFieldProps {
-  images: File[];
-  onChange: (images: File[]) => void;
-}
-
-interface ImagePreview {
-  file: File;
-  url: string;
+  images: CardImage[];
+  onChange: (images: CardImage[]) => void;
 }
 
 function readFile(file: File): Promise<string> {
@@ -33,86 +30,106 @@ function readFile(file: File): Promise<string> {
 }
 
 const ImagesField = ({ images, onChange }: ImagesFieldProps) => {
-  const [previews, setPreviews] = useState<Map<File, string>>(new Map());
   const [error, setError] = useState("");
+  const [isDragging, setIsDragging] = useState(false);
 
-  async function handleFiles(files: FileList | null) {
-    if (!files) return;
+  async function handleFiles(files: FileList | File[] | null) {
+    if (!files || files.length === 0) return;
 
-    const selected = Array.from(files)
-      .filter((file) => file.type.startsWith("image/"))
-      .slice(0, 5 - images.length);
+    const remaining = 5 - images.length;
 
-    if (selected.length === 0) {
+    if (remaining <= 0) {
       setError("You can add up to 5 images");
       return;
     }
 
+    const selectedFiles = Array.from(files).filter((file) =>
+      file.type.startsWith("image/"),
+    );
+
+    if (selectedFiles.length === 0) {
+      setError("Please select image files");
+      return;
+    }
+
+    const selected = selectedFiles.slice(0, remaining);
+    const exceededLimit = selectedFiles.length > remaining;
+
     setError("");
 
     try {
-      const newPreviews: ImagePreview[] = await Promise.all(
-        selected.map(async (file) => ({
-          file,
-          url: await readFile(file),
-        })),
+      const newImages = await Promise.all(
+        selected.map(
+          async (file): Promise<CardImage> => ({
+            id: crypto.randomUUID(),
+            name: file.name,
+            file,
+            preview: await readFile(file),
+          }),
+        ),
       );
 
-      setPreviews((previous) => {
-        const next =
-          images.length === 0 ? new Map<File, string>() : new Map(previous);
+      onChange([...images, ...newImages]);
 
-        newPreviews.forEach(({ file, url }) => {
-          next.set(file, url);
-        });
-
-        return next;
-      });
-
-      onChange([...images, ...selected]);
+      if (exceededLimit) {
+        setError("Only 5 images can be added");
+      }
     } catch {
       setError("Failed to read one of the images");
     }
   }
 
-  function removeImage(file: File) {
-    onChange(images.filter((image) => image !== file));
+  function removeImage(id: string) {
+    onChange(images.filter((image) => image.id !== id));
+    setError("");
+  }
 
-    setPreviews((previous) => {
-      const next = new Map(previous);
-      next.delete(file);
-      return next;
-    });
+  function handleDrop(event: DragEvent<HTMLLabelElement>) {
+    event.preventDefault();
+    setIsDragging(false);
+    void handleFiles(event.dataTransfer.files);
   }
 
   return (
     <CardFormField
-      label={`Images ${images.length > 0 ? "(" + images.length + ")" : ""}`}
+      label={`Images${images.length > 0 ? ` (${images.length})` : ""}`}
       error={error}
     >
       <div className={styles.container}>
-        {images.map((file, index) => (
-          <div className={styles.image} key={`${file.name}-${index}`}>
-            {previews.has(file) && (
-              <img src={previews.get(file)} alt={file.name} />
-            )}
+        {images.map((image) => (
+          <div className={styles.image} key={image.id}>
+            <img src={image.preview} alt={image.name} />
 
             <button
               type="button"
               className={styles.remove}
-              aria-label={`Remove ${file.name}`}
-              onClick={() => removeImage(file)}
+              aria-label={`Remove ${image.name}`}
+              onClick={() => removeImage(image.id)}
             >
               ×
             </button>
 
-            <span className={styles.fileName}>{file.name}</span>
+            <span className={styles.fileName}>{image.name}</span>
           </div>
         ))}
 
         {images.length < 5 && (
-          <label className={styles.upload}>
+          <label
+            className={`${styles.upload} ${
+              isDragging ? styles.isDragging : ""
+            }`}
+            onDragOver={(event) => {
+              event.preventDefault();
+              setIsDragging(true);
+            }}
+            onDragLeave={(event) => {
+              event.preventDefault();
+              setIsDragging(false);
+            }}
+            onDrop={handleDrop}
+          >
             <span className={styles.imageText}>Drag & drop images here</span>
+
             <span className={styles.imageSubtext}>or click to browse</span>
 
             <input

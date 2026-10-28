@@ -75,3 +75,7 @@
   width: 28px;
   height: 28px;
 }
+.isDragging {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+}

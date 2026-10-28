@@ -1,25 +1,26 @@
 import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import styles from "./CreateCardForm.module.css";
-import type { CardFormValues } from "../../types/cardFormTypes";
-import { createCard } from "../../services/createCard";
 import CardFormField from "../CardFormField/CardFormField";
-import TagsField from "../TagsField/TagsField";
 import ImagesField from "../ImagesField/ImagesField";
+import TagsField from "../TagsField/TagsField";
+import styles from "./CreateCardForm.module.css";
+import { type CardFormValues } from "../../types/cardFormTypes";
 import Button from "../Button/Button";
+import { createEmptyCardFormValues } from "../../services/createCard";
 
-const defaultValues: CardFormValues = {
-  title: "",
-  description: "",
-  priority: "",
-  status: "",
-  assignee: "",
-  deadline: "",
-  tags: [],
-  images: [],
-};
+interface CreateCardFormProps {
+  initialValues: CardFormValues;
+  isEditing: boolean;
+  onSubmit: (data: CardFormValues) => Promise<void>;
+  onCancel: () => void;
+}
 
-const CreateCardForm = () => {
+const CreateCardForm = ({
+  initialValues,
+  isEditing,
+  onSubmit,
+  onCancel,
+}: CreateCardFormProps) => {
   const [serverError, setServerError] = useState("");
 
   const {
@@ -30,57 +31,45 @@ const CreateCardForm = () => {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<CardFormValues>({
-    defaultValues,
+    defaultValues: initialValues,
     mode: "onBlur",
   });
 
-  const tags = useWatch({
-    control,
-    name: "tags",
-  });
+  const tags = useWatch({ control, name: "tags" }) ?? [];
+  const images = useWatch({ control, name: "images" }) ?? [];
 
-  const images = useWatch({
-    control,
-    name: "images",
-  });
-
-  async function onSubmit(data: CardFormValues) {
+  async function submitForm(data: CardFormValues) {
     setServerError("");
 
     try {
-      await createCard(data);
-
-      alert(
-        JSON.stringify(
-          {
-            ...data,
-            images: data.images.map((file) => file.name),
-          },
-          null,
-          2,
-        ),
-      );
-
-      reset(defaultValues);
+      await onSubmit(data);
     } catch (error) {
       setServerError(
-        error instanceof Error ? error.message : "Failed to create card",
+        error instanceof Error ? error.message : "Failed to save card",
       );
     }
   }
 
   function handleCancel() {
-    reset(defaultValues);
     setServerError("");
+
+    if (isEditing) {
+      onCancel();
+      return;
+    }
+
+    reset(createEmptyCardFormValues());
   }
 
   return (
     <section>
-      <h1 className={styles.title}>Create New Card</h1>
+      <h1 className={styles.title}>
+        {isEditing ? "Edit Card" : "Create New Card"}
+      </h1>
 
       <form
         className={styles.form}
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(submitForm)}
         noValidate
       >
         <div className={styles.columns}>
@@ -89,6 +78,14 @@ const CreateCardForm = () => {
               <input
                 {...register("title", {
                   required: "Title is required",
+                  minLength: {
+                    value: 3,
+                    message: "Minimum 3 characters",
+                  },
+                  maxLength: {
+                    value: 100,
+                    message: "Maximum 100 characters",
+                  },
                 })}
                 placeholder="Enter card title"
               />
@@ -102,6 +99,10 @@ const CreateCardForm = () => {
               <textarea
                 {...register("description", {
                   required: "Description is required",
+                  minLength: {
+                    value: 10,
+                    message: "Minimum 10 characters",
+                  },
                 })}
                 placeholder="Enter detailed description..."
               />
@@ -145,15 +146,7 @@ const CreateCardForm = () => {
             </CardFormField>
 
             <CardFormField label="Deadline" error={errors.deadline?.message}>
-              <input
-                type="date"
-                {...register("deadline", {
-                  validate: (value) =>
-                    !value ||
-                    /^\d{4}-\d{2}-\d{2}$/.test(value) ||
-                    "Please enter a valid date",
-                })}
-              />
+              <input type="date" {...register("deadline")} />
             </CardFormField>
 
             <TagsField
@@ -195,12 +188,22 @@ const CreateCardForm = () => {
             Cancel
           </Button>
 
-          <Button typeBtn="Apply" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Creating..." : "Create Card"}
+          <Button
+            typeBtn="Apply"
+            type="submit"
+            className={styles.submitButton}
+            disabled={isSubmitting}
+          >
+            {isSubmitting
+              ? "Saving..."
+              : isEditing
+                ? "Save Card"
+                : "Create Card"}
           </Button>
         </div>
       </form>
     </section>
   );
 };
+
 export default CreateCardForm;
