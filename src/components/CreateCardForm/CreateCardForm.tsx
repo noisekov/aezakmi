@@ -71,7 +71,7 @@ const CreateCardForm = ({
   }
 
   return (
-    <section>
+    <section className={styles.page}>
       <h1 className={styles.title}>
         {isEditing ? "Edit Card" : "Create New Card"}
       </h1>

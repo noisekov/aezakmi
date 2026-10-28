@@ -1,13 +1,15 @@
 import { useState } from "react";
 import type { DragEvent } from "react";
 import CardFormField from "../CardFormField/CardFormField";
-import styles from "./ImagesField.module.css";
 import type { CardImage } from "../../types/cardFormTypes";
+import styles from "./ImagesField.module.css";
 
 interface ImagesFieldProps {
   images: CardImage[];
   onChange: (images: CardImage[]) => void;
 }
+
+const MAX_IMAGES = 3;
 
 function readFile(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -28,8 +30,6 @@ function readFile(file: File): Promise<string> {
     reader.readAsDataURL(file);
   });
 }
-
-const MAX_IMAGES = 3;
 
 const ImagesField = ({ images, onChange }: ImagesFieldProps) => {
   const [error, setError] = useState("");
@@ -100,14 +100,18 @@ const ImagesField = ({ images, onChange }: ImagesFieldProps) => {
       <div className={styles.container}>
         {images.map((image) => (
           <div className={styles.image} key={image.id}>
-            <img src={image.preview} alt={image.name} />
+            <img
+              className={styles.preview}
+              src={image.preview}
+              alt={image.name}
+            />
 
             <button
               type="button"
               className={styles.remove}
               aria-label={`Remove ${image.name}`}
               onClick={() => removeImage(image.id)}
-            ></button>
+            />
 
             <span className={styles.fileName}>{image.name}</span>
           </div>
@@ -122,10 +126,7 @@ const ImagesField = ({ images, onChange }: ImagesFieldProps) => {
               event.preventDefault();
               setIsDragging(true);
             }}
-            onDragLeave={(event) => {
-              event.preventDefault();
-              setIsDragging(false);
-            }}
+            onDragLeave={() => setIsDragging(false)}
             onDrop={handleDrop}
           >
             <span className={styles.imageText}>Drag & drop images here</span>
@@ -133,6 +134,7 @@ const ImagesField = ({ images, onChange }: ImagesFieldProps) => {
             <span className={styles.imageSubtext}>or click to browse</span>
 
             <input
+              className={styles.fileInput}
               type="file"
               accept="image/*"
               multiple

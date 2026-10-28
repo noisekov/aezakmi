@@ -8,9 +8,7 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition:
-    background 0.2s,
-    transform 0.1s;
+  transition: 0.3s all;
 }
 
 .button:active,

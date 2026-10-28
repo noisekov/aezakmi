@@ -23,9 +23,7 @@
   background-repeat: no-repeat;
   background-position: left 20px center;
   background-size: 18px 18px;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
+  transition: 0.3s all;
 }
 
 .inputPassword {
