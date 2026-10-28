@@ -29,6 +29,8 @@ function readFile(file: File): Promise<string> {
   });
 }
 
+const MAX_IMAGES = 3;
+
 const ImagesField = ({ images, onChange }: ImagesFieldProps) => {
   const [error, setError] = useState("");
   const [isDragging, setIsDragging] = useState(false);
@@ -36,10 +38,10 @@ const ImagesField = ({ images, onChange }: ImagesFieldProps) => {
   async function handleFiles(files: FileList | File[] | null) {
     if (!files || files.length === 0) return;
 
-    const remaining = 3 - images.length;
+    const remaining = MAX_IMAGES - images.length;
 
     if (remaining <= 0) {
-      setError("You can add up to 3 images");
+      setError(`You can add up to ${MAX_IMAGES} images`);
       return;
     }
 
@@ -72,7 +74,7 @@ const ImagesField = ({ images, onChange }: ImagesFieldProps) => {
       onChange([...images, ...newImages]);
 
       if (exceededLimit) {
-        setError("Only 3 images can be added");
+        setError(`Only ${MAX_IMAGES} images can be added`);
       }
     } catch {
       setError("Failed to read one of the images");
@@ -111,7 +113,7 @@ const ImagesField = ({ images, onChange }: ImagesFieldProps) => {
           </div>
         ))}
 
-        {images.length < 3 && (
+        {images.length < MAX_IMAGES && (
           <label
             className={`${styles.upload} ${
               isDragging ? styles.isDragging : ""
