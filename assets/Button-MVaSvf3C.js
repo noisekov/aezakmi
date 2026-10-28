@@ -1,1 +1,0 @@
-import{r as e}from"./index-DdO9_-Kf.js";var t={button:`_button_hx8bi_1`,buttonApply:`_buttonApply_hx8bi_41`,buttonCancel:`_buttonCancel_hx8bi_51`},n=e(),r=({children:e,className:r=``,typeBtn:i=`Apply`,...a})=>(0,n.jsx)(`button`,{className:`${t.button} ${r} ${t[`button${i}`]}`,...a,children:e});export{r as t};
