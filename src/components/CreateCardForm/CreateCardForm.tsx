@@ -35,6 +35,14 @@ const CreateCardForm = ({
     mode: "onBlur",
   });
 
+  const [deadlineInputType, setDeadlineInputType] = useState<"text" | "date">(
+    initialValues.deadline ? "date" : "text",
+  );
+
+  const deadlineField = register("deadline");
+  const priority = useWatch({ control, name: "priority" });
+  const status = useWatch({ control, name: "status" });
+  const assignee = useWatch({ control, name: "assignee" });
   const tags = useWatch({ control, name: "tags" }) ?? [];
   const images = useWatch({ control, name: "images" }) ?? [];
 
@@ -59,6 +67,7 @@ const CreateCardForm = ({
     }
 
     reset(createEmptyCardFormValues());
+    setDeadlineInputType("text");
   }
 
   return (
@@ -87,6 +96,7 @@ const CreateCardForm = ({
                     message: "Maximum 100 characters",
                   },
                 })}
+                className={styles.fieldControl}
                 placeholder="Enter card title"
               />
             </CardFormField>
@@ -104,6 +114,7 @@ const CreateCardForm = ({
                     message: "Minimum 10 characters",
                   },
                 })}
+                className={styles.fieldControl}
                 placeholder="Enter detailed description..."
               />
             </CardFormField>
@@ -117,36 +128,94 @@ const CreateCardForm = ({
                 {...register("priority", {
                   required: "Please select a priority",
                 })}
+                className={`${styles.fieldControl} ${styles.selectControl} ${
+                  !priority ? styles.placeholder : ""
+                }`}
               >
-                <option value="">Select priority</option>
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
+                <option value="" className={styles.placeholderOption}>
+                  Select priority
+                </option>
+                <option value="Low" className={styles.option}>
+                  Low
+                </option>
+                <option value="Medium" className={styles.option}>
+                  Medium
+                </option>
+                <option value="High" className={styles.option}>
+                  High
+                </option>
               </select>
             </CardFormField>
 
             <CardFormField label="Status" error={errors.status?.message}>
-              <select {...register("status")}>
-                <option value="">Select status</option>
-                <option value="To Do">To Do</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Done">Done</option>
+              <select
+                {...register("status")}
+                className={`${styles.fieldControl} ${styles.selectControl} ${
+                  !status ? styles.placeholder : ""
+                }`}
+              >
+                <option value="" className={styles.placeholderOption}>
+                  Select status
+                </option>
+                <option value="To Do" className={styles.option}>
+                  To Do
+                </option>
+                <option value="In Progress" className={styles.option}>
+                  In Progress
+                </option>
+                <option value="Done" className={styles.option}>
+                  Done
+                </option>
               </select>
             </CardFormField>
           </div>
 
           <div className={styles.column}>
             <CardFormField label="Assignee">
-              <select {...register("assignee")}>
-                <option value="">Select assignee</option>
-                <option value="Alex Johnson">Alex Johnson</option>
-                <option value="Sam Williams">Sam Williams</option>
-                <option value="Emily Davis">Emily Davis</option>
+              <select
+                {...register("assignee")}
+                className={`${styles.fieldControl} ${styles.selectControl} ${
+                  !assignee ? styles.placeholder : ""
+                }`}
+              >
+                <option value="" className={styles.placeholderOption}>
+                  Select assignee
+                </option>
+                <option value="Alex Johnson" className={styles.option}>
+                  Alex Johnson
+                </option>
+                <option value="Sam Williams" className={styles.option}>
+                  Sam Williams
+                </option>
+                <option value="Emily Davis" className={styles.option}>
+                  Emily Davis
+                </option>
               </select>
             </CardFormField>
 
             <CardFormField label="Deadline" error={errors.deadline?.message}>
-              <input type="date" {...register("deadline")} />
+              <div className={styles.dateField}>
+                <input
+                  {...deadlineField}
+                  type={deadlineInputType}
+                  placeholder="Select date"
+                  className={`${styles.fieldControl} ${styles.dateInput}`}
+                  onFocus={() => setDeadlineInputType("date")}
+                  onBlur={(event) => {
+                    deadlineField.onBlur(event);
+
+                    if (!event.currentTarget.value) {
+                      setDeadlineInputType("text");
+                    }
+                  }}
+                />
+
+                <img
+                  src="/icons/calendar.svg"
+                  className={styles.calendarIcon}
+                  alt="Calendar"
+                />
+              </div>
             </CardFormField>
 
             <TagsField

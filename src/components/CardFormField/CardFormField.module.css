@@ -35,6 +35,16 @@
   outline: none;
 }
 
+.field select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("/icons/arrow.svg");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 5px 5px;
+  padding-right: 32px;
+}
+
 .field input:focus,
 .field textarea:focus,
 .field select:focus {
