@@ -22,6 +22,7 @@ const CreateCardForm = ({
   onCancel,
 }: CreateCardFormProps) => {
   const [serverError, setServerError] = useState("");
+  const [isDeadlineFocused, setIsDeadlineFocused] = useState(false);
 
   const {
     register,
@@ -35,14 +36,12 @@ const CreateCardForm = ({
     mode: "onBlur",
   });
 
-  const [deadlineInputType, setDeadlineInputType] = useState<"text" | "date">(
-    initialValues.deadline ? "date" : "text",
-  );
-
   const deadlineField = register("deadline");
+
   const priority = useWatch({ control, name: "priority" });
   const status = useWatch({ control, name: "status" });
   const assignee = useWatch({ control, name: "assignee" });
+  const deadline = useWatch({ control, name: "deadline" });
   const tags = useWatch({ control, name: "tags" }) ?? [];
   const images = useWatch({ control, name: "images" }) ?? [];
 
@@ -60,6 +59,7 @@ const CreateCardForm = ({
 
   function handleCancel() {
     setServerError("");
+    setIsDeadlineFocused(false);
 
     if (isEditing) {
       onCancel();
@@ -67,7 +67,6 @@ const CreateCardForm = ({
     }
 
     reset(createEmptyCardFormValues());
-    setDeadlineInputType("text");
   }
 
   return (
@@ -195,26 +194,32 @@ const CreateCardForm = ({
 
             <CardFormField label="Deadline" error={errors.deadline?.message}>
               <div className={styles.dateField}>
+                {!deadline && !isDeadlineFocused && (
+                  <span className={styles.datePlaceholder}>Select date</span>
+                )}
+
                 <input
                   {...deadlineField}
-                  type={deadlineInputType}
-                  placeholder="Select date"
-                  className={`${styles.fieldControl} ${styles.dateInput}`}
-                  onFocus={() => setDeadlineInputType("date")}
+                  type="date"
+                  className={`${styles.fieldControl} ${styles.dateInput} ${
+                    !deadline && !isDeadlineFocused ? styles.dateInputEmpty : ""
+                  }`}
+                  aria-label="Select date"
+                  onFocus={() => setIsDeadlineFocused(true)}
                   onBlur={(event) => {
                     deadlineField.onBlur(event);
+                    setIsDeadlineFocused(false);
+                  }}
+                  onClick={(event) => {
+                    const input = event.currentTarget;
 
-                    if (!event.currentTarget.value) {
-                      setDeadlineInputType("text");
+                    if (typeof input.showPicker === "function") {
+                      input.showPicker();
                     }
                   }}
                 />
 
-                <img
-                  src="/icons/calendar.svg"
-                  className={styles.calendarIcon}
-                  alt="Calendar"
-                />
+                <span className={styles.calendarIcon} aria-hidden="true" />
               </div>
             </CardFormField>
 
