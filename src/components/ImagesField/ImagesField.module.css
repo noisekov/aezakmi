@@ -24,6 +24,12 @@
   white-space: nowrap;
 }
 
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .remove {
   position: absolute;
   top: 4px;
@@ -31,13 +37,26 @@
   width: 20px;
   height: 20px;
   border: none;
-  border-radius: 5px;
-  background: white;
-  color: #e5484d;
+  background: transparent;
   cursor: pointer;
+  transition: 0.3s all;
+}
+
+.remove:hover {
+  transform: scale(1.1);
+}
+
+.remove:before {
+  content: url("/icons/trash.svg");
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
 }
 
 .upload {
+  width: 100%;
   padding: 24px 0;
   align-items: center;
   justify-content: center;

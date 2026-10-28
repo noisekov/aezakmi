@@ -36,10 +36,10 @@ const ImagesField = ({ images, onChange }: ImagesFieldProps) => {
   async function handleFiles(files: FileList | File[] | null) {
     if (!files || files.length === 0) return;
 
-    const remaining = 5 - images.length;
+    const remaining = 3 - images.length;
 
     if (remaining <= 0) {
-      setError("You can add up to 5 images");
+      setError("You can add up to 3 images");
       return;
     }
 
@@ -72,7 +72,7 @@ const ImagesField = ({ images, onChange }: ImagesFieldProps) => {
       onChange([...images, ...newImages]);
 
       if (exceededLimit) {
-        setError("Only 5 images can be added");
+        setError("Only 3 images can be added");
       }
     } catch {
       setError("Failed to read one of the images");
@@ -105,15 +105,13 @@ const ImagesField = ({ images, onChange }: ImagesFieldProps) => {
               className={styles.remove}
               aria-label={`Remove ${image.name}`}
               onClick={() => removeImage(image.id)}
-            >
-              ×
-            </button>
+            ></button>
 
             <span className={styles.fileName}>{image.name}</span>
           </div>
         ))}
 
-        {images.length < 5 && (
+        {images.length < 3 && (
           <label
             className={`${styles.upload} ${
               isDragging ? styles.isDragging : ""
