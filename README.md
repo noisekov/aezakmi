@@ -79,3 +79,11 @@ Frankfurter — открытый API для получения справочн�
 - **flag-icons** — отображение флагов стран в таблице валют.
 
 Флаги отображаются с помощью CSS-классов библиотеки, без использования emoji.
+
+# Screenshots
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
