@@ -63,44 +63,36 @@ const Login = () => {
         <h1 className={styles.title}>Log in</h1>
         <p className={styles.subtitle}>Welcome Back</p>
 
-        <div className={styles.input__container}>
-          <div className={styles.input__field}>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputField}>
             <input
-              className={`${styles.input} ${styles.input__email} ${
-                errors.login ? styles.input__invalid : ""
+              className={`${styles.input} ${styles.inputEmail} ${
+                errors.login ? styles.inputInvalid : ""
               }`}
               type="email"
               name="login"
               placeholder="Email Address"
               onChange={handleLoginChange}
-              aria-invalid={Boolean(errors.login)}
-              aria-describedby={errors.login ? "login-error" : undefined}
             />
 
             {errors.login && (
-              <p id="login-error" className={styles.input__error}>
-                {errors.login}
-              </p>
+              <p className={styles.inputError}>{errors.login}</p>
             )}
           </div>
 
-          <div className={styles.input__field}>
+          <div className={styles.inputField}>
             <input
-              className={`${styles.input} ${styles.input__password} ${
-                errors.password ? styles.input__invalid : ""
+              className={`${styles.input} ${styles.inputPassword} ${
+                errors.password ? styles.inputInvalid : ""
               }`}
               type="password"
               name="password"
               placeholder="Password"
               onChange={handlePasswordChange}
-              aria-invalid={Boolean(errors.password)}
-              aria-describedby={errors.password ? "password-error" : undefined}
             />
 
             {errors.password && (
-              <p id="password-error" className={styles.input__error}>
-                {errors.password}
-              </p>
+              <p className={styles.inputError}>{errors.password}</p>
             )}
           </div>
         </div>

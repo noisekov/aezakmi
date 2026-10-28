@@ -54,7 +54,7 @@
   gap: 4px;
 }
 
-.menu__item {
+.menuItem {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,35 +71,35 @@
 
 .logo:hover,
 .logout:hover,
-.menu__item:hover {
+.menuItem:hover {
   transform: scale(1.05);
 }
 
-.aside.open .menu__item {
+.aside.open .menuItem {
   flex-direction: row;
 }
 
-.menu__item.active {
+.menuItem.active {
   color: #2563eb;
   background: #e7eeff;
   border-radius: 16px;
 }
 
-.menu__item:before {
+.menuItem:before {
   display: block;
   width: 22px;
   height: 22px;
 }
 
-.menu__item-rates:before {
+.menuItemRates:before {
   content: url("/icons/rates.svg");
 }
 
-.menu__item-cards:before {
+.menuItemCards:before {
   content: url("/icons/cards.svg");
 }
 
-.menu__title {
+.menuTitle {
   font-weight: 600;
   font-size: 11px;
   line-height: 100%;

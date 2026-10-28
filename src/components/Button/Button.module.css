@@ -18,19 +18,19 @@
   transform: translateY(1px);
 }
 
-.button--apply {
+.buttonApply {
   background: #18184c;
   box-shadow: 0px 4px 12px 0px #18184c33;
 }
 
-.button--cancel {
+.buttonCancel {
   border: 1px solid #e1e2ed;
   background: #ffffff;
   color: #777991;
 }
 
-.button--cancel:disabled,
-.button--apply:disabled {
+.buttonCancel:disabled,
+.buttonApply:disabled {
   cursor: wait;
   opacity: 0.6;
 }

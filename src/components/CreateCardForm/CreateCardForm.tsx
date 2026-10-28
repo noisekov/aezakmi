@@ -186,7 +186,7 @@ const CreateCardForm = () => {
 
         <div className={styles.actions}>
           <Button
-            typeBtn="cancel"
+            typeBtn="Cancel"
             type="button"
             className={styles.cancelButton}
             onClick={handleCancel}
@@ -195,7 +195,7 @@ const CreateCardForm = () => {
             Cancel
           </Button>
 
-          <Button typeBtn="apply" type="submit" disabled={isSubmitting}>
+          <Button typeBtn="Apply" type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Creating..." : "Create Card"}
           </Button>
         </div>

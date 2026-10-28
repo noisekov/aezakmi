@@ -28,15 +28,15 @@
     box-shadow 0.2s;
 }
 
-.input__password {
+.inputPassword {
   background-image: url("/icons/password.svg");
 }
 
-.input__email {
+.inputEmail {
   background-image: url("/icons/email.svg");
 }
 
-.input__container {
+.inputContainer {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -76,23 +76,23 @@
   margin: 0 0 24px;
 }
 
-.input__field {
+.inputField {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.input__invalid {
+.inputInvalid {
   border-color: #ea3a3a;
   background-color: #fff2f2;
 }
 
-.input__invalid:focus {
+.inputInvalid:focus {
   border-color: #ea3a3a;
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
 }
 
-.input__error {
+.inputError {
   font-weight: 500;
   margin: 0;
   color: #ea3a3a;

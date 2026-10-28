@@ -24,15 +24,15 @@ const Aside = () => {
       </button>
 
       <nav className={styles.menu}>
-        {menuOpen && <span className={styles.menu__title}>Menu</span>}
+        {menuOpen && <span className={styles.menuTitle}>Menu</span>}
 
         <NavLink
           to="/rates"
           end
           className={({ isActive }) =>
             [
-              styles.menu__item,
-              styles["menu__item-rates"],
+              styles.menuItem,
+              styles.menuItemRates,
               isActive ? styles.active : "",
             ]
               .filter(Boolean)
@@ -47,8 +47,8 @@ const Aside = () => {
           end
           className={({ isActive }) =>
             [
-              styles.menu__item,
-              styles["menu__item-cards"],
+              styles.menuItem,
+              styles.menuItemCards,
               isActive ? styles.active : "",
             ]
               .filter(Boolean)

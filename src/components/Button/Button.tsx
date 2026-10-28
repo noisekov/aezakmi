@@ -4,18 +4,18 @@ import styles from "./Button.module.css";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   className?: string;
-  typeBtn?: "apply" | "cancel";
+  typeBtn?: "Apply" | "Cancel";
 }
 
 const Button = ({
   children,
   className = "",
-  typeBtn = "apply",
+  typeBtn = "Apply",
   ...props
 }: ButtonProps) => {
   return (
     <button
-      className={`${styles.button} ${className} ${styles[`button--${typeBtn}`]}`}
+      className={`${styles.button} ${className} ${styles[`button${typeBtn}`]}`}
       {...props}
     >
       {children}
