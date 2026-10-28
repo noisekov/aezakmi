@@ -1,0 +1,1 @@
+import{r as e}from"./index-dpGDTO4x.js";var t={button:`_button_fm0ky_1`,buttonApply:`_buttonApply_fm0ky_37`,buttonCancel:`_buttonCancel_fm0ky_47`},n=e(),r=({children:e,className:r=``,typeBtn:i=`Apply`,...a})=>(0,n.jsx)(`button`,{className:`${t.button} ${r} ${t[`button${i}`]}`,...a,children:e});export{r as t};
