@@ -181,19 +181,13 @@ const CreateCardForm = ({
           <Button
             typeBtn="Cancel"
             type="button"
-            className={styles.cancelButton}
             onClick={handleCancel}
             disabled={isSubmitting}
           >
             Cancel
           </Button>
 
-          <Button
-            typeBtn="Apply"
-            type="submit"
-            className={styles.submitButton}
-            disabled={isSubmitting}
-          >
+          <Button typeBtn="Apply" type="submit" disabled={isSubmitting}>
             {isSubmitting
               ? "Saving..."
               : isEditing

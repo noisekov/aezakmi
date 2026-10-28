@@ -89,21 +89,11 @@ const CardPreview = ({ card, onBackToForm, onEdit }: CardPreviewProps) => {
       </article>
 
       <div className={styles.actions}>
-        <Button
-          typeBtn="Cancel"
-          type="button"
-          className={styles.backButton}
-          onClick={onBackToForm}
-        >
+        <Button typeBtn="Cancel" type="button" onClick={onBackToForm}>
           ← Back to Form
         </Button>
 
-        <Button
-          typeBtn="Apply"
-          type="button"
-          className={styles.editButton}
-          onClick={onEdit}
-        >
+        <Button typeBtn="Apply" type="button" onClick={onEdit}>
           Edit Card
         </Button>
       </div>

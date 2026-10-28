@@ -155,32 +155,6 @@
   margin-top: 16px;
 }
 
-.backButton,
-.editButton {
-  min-height: 40px;
-  padding: 0 18px;
-  border-radius: 10px;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.backButton {
-  border: 1px solid #e1e2ed;
-  background: transparent;
-  color: #777991;
-}
-
-.editButton {
-  border: 1px solid #191a4b;
-  background: #191a4b;
-  color: white;
-}
-
-.backButton:hover,
-.editButton:hover {
-  opacity: 0.85;
-}
-
 @media (max-width: 768px) {
   .card {
     padding: 18px 16px;
@@ -202,10 +176,6 @@
 
   .actions {
     align-items: stretch;
-  }
-
-  .backButton,
-  .editButton {
-    flex: 1;
+    flex-direction: column-reverse;
   }
 }
