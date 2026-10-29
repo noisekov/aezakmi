@@ -17,6 +17,14 @@ interface CurrencyDetailsProps {
   onPeriodChange: (period: Period) => void;
 }
 
+const PERIOD_TITLES: Record<Period, string> = {
+  "1W": "Weekly dynamics",
+  "1M": "Monthly dynamics",
+  "3M": "Quarterly dynamics",
+  "6M": "6-month dynamics",
+  "1Y": "Yearly dynamics",
+};
+
 const CurrencyDetails = ({
   currency,
   period,
@@ -53,7 +61,7 @@ const CurrencyDetails = ({
         <div className={styles.headingText}>
           <h2 className={styles.title}>USD / {currency.code}</h2>
 
-          <p className={styles.subtitle}>{currency.name} per 1 USD</p>
+          <p className={styles.subtitle}>{PERIOD_TITLES[period]}</p>
         </div>
       </div>
 
