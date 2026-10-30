@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import type { HistoryPoint } from "../../types/currency";
 import styles from "./RateChart.module.css";
 
@@ -67,6 +68,8 @@ const createChartPaths = (points: HistoryPoint[]) => {
 };
 
 const RateChart = ({ points, loading, error }: RateChartProps) => {
+  const paths = useMemo(() => createChartPaths(points), [points]);
+
   if (loading) {
     return (
       <div className={styles.chartContainer}>
@@ -90,8 +93,6 @@ const RateChart = ({ points, loading, error }: RateChartProps) => {
       </div>
     );
   }
-
-  const paths = createChartPaths(points);
 
   return (
     <div className={styles.chartContainer}>
